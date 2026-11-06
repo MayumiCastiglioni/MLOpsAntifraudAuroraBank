@@ -4,6 +4,12 @@ Atualizado em 06/11/2026. Entrega exigida: 11/11/2026, às 23h59 (Brasília).
 Estado: planejamento; nenhuma etapa de implementação foi concluída.
 Datas abaixo são metas propostas, não resultados ou compromissos já cumpridos.
 
+## Prioridade atual: adiantar em 06/11
+
+O usuário solicitou concentrar o máximo de avanço hoje. As datas da tabela abaixo são reserva de prazo, não impedimento para antecipar etapas. Ordem do dia: auditoria reproduzível → ambiente e scaffold → custo e Pipeline → rodada inicial das cinco famílias → monitoramento → integração, conforme as verificações permitirem. Nenhuma etapa deve ser declarada concluída sem evidência.
+
+Todo teste deve seguir [o protocolo de experimentos](experimentos.md), aparecer no notebook e acompanhar a exportação final, inclusive tentativas descartadas ou malsucedidas. O escopo da rodada inicial é cinco configurações, uma por família, sem busca extensa.
+
 ## Estratégia
 
 Primeiro verificar dados e ambiente; depois comparar modelos e políticas de corte; por último promover e reunir evidências. A decisão será pelo custo, preservando o contrato e a avaliação temporal. Não ampliar a infraestrutura antes de necessidade comprovada.
@@ -23,7 +29,7 @@ Primeiro verificar dados e ambiente; depois comparar modelos e políticas de cor
 
 ## Experimentos iniciais propostos
 
-Comparar regressão logística com Random Forest como ponto de partida: uma referência simples e um modelo capaz de representar relações não lineares. A dupla é proposta, não escolha definitiva. Validar suporte ao Pipeline, predict_proba e ambiente antes de adotar. Começar com poucos hiperparâmetros, sem busca extensa na validação.
+Proposta inicial ampliada no protocolo de experimentos: regressão logística, árvore de decisão, Random Forest, Extra Trees e HistGradientBoosting. A comparação original entre regressão logística e Random Forest permanece como referência de contraste: uma referência simples e um modelo capaz de representar relações não lineares. A dupla é proposta, não escolha definitiva. Validar suporte ao Pipeline, predict_proba e ambiente antes de adotar. Começar com poucos hiperparâmetros, sem busca extensa na validação.
 
 Definir precisamente PR-AUC (por exemplo, average precision, explicitamente identificada) para evitar comparar implementações diferentes. Não confundir ROC-AUC com a métrica solicitada.
 
