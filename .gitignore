@@ -18,3 +18,5 @@ entrega_parte1_*.zip
 *.parquet
 *.zip
 .pytest_cache/
+
+*.log

@@ -51,3 +51,11 @@ O professor recebe o notebook e o ZIP exportado, não necessariamente o reposit�
 | ID | Status | Resultado / motivo |
 |---|---|---|
 | E01–E05 | Planejados | Aguardam auditoria completa, ambiente e configurações registradas |
+
+## Configurações congeladas antes da rodada
+
+E01: LogisticRegression(max_iter=1000, random_state=42), escala numérica. E02: DecisionTreeClassifier(max_depth=8, min_samples_leaf=50, random_state=42). E03: RandomForestClassifier(n_estimators=150, max_depth=12, min_samples_leaf=20, n_jobs=2, random_state=42). E04: ExtraTreesClassifier com os mesmos parâmetros de capacidade da floresta. E05: HistGradientBoostingClassifier(max_iter=150, max_leaf_nodes=15, l2_regularization=1, random_state=42). Demais parâmetros são padrões da versão e serão registrados na run.
+
+Todas usam OneHotEncoder com categorias do contrato e saída densa; apenas E01 escala numéricas. Pesos de classe permanecem padrão, sem reamostragem ou calibração. Empates em custo arredondado a centavos: menor taxa de bloqueio, depois menor corte. Se houver empate final entre modelos, considerar estabilidade semanal e simplicidade, registrando a justificativa.
+
+Ambiente: Python 3.11, sklearn 1.8.0, cliente/servidor MLflow 2.19.0 em instância local separada (porta 5001; backend aurora_mlflow). O ambiente curto herda pacotes locais para reduzir instalação; registrar versões efetivas e não chamar isso de ambiente hermético.
