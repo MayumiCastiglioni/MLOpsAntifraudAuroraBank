@@ -1,6 +1,6 @@
 # Protocolo e registro de experimentos
 
-Data: 06/11/2026. Protocolo definido antes do treino; nenhum resultado de modelo disponível.
+Data: 06/11/2026. Protocolo definido antes do treino; resultados agora disponíveis em docs/evidencias/comparacao-inicial.md.
 
 ## Por que ampliar
 
@@ -50,7 +50,7 @@ O professor recebe o notebook e o ZIP exportado, não necessariamente o reposit�
 
 | ID | Status | Resultado / motivo |
 |---|---|---|
-| E01–E05 | Planejados | Aguardam auditoria completa, ambiente e configurações registradas |
+| E01–E05 | Concluídos | Resultados e run_ids em docs/evidencias/experimentos-iniciais.json; E03 selecionado como candidato |
 
 ## Configurações congeladas antes da rodada
 

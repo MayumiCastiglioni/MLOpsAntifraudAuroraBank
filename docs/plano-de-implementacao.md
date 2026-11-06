@@ -1,7 +1,7 @@
 # Plano de execução — Parte 1
 
 Atualizado em 06/11/2026. Entrega exigida: 11/11/2026, às 23h59 (Brasília).
-Estado: planejamento; nenhuma etapa de implementação foi concluída.
+Estado: execução em 06/11; auditorias e ambiente preparados, Pipeline e custo implementados; comparação inicial em andamento. Evidências em docs/evidencias/.
 Datas abaixo são metas propostas, não resultados ou compromissos já cumpridos.
 
 ## Prioridade atual: adiantar em 06/11
@@ -67,3 +67,13 @@ Usar branches codex/<assunto> e PRs por etapa coerente: dados e ambiente; pipeli
 ## Próxima ação concreta
 
 Auditar os dois CSVs diretamente do ZIP ou de uma pasta local ignorada pelo Git. Produzir relatório de contagens e inconsistências antes de limpar dados, treinar ou escolher modelo. Em paralelo lógico, conferir a compatibilidade do ambiente, sem alterar serviços existentes.
+
+## Situação ao final da rodada de 06/11
+
+1. Auditoria inicial e temporal executadas; limitações upstream explicitadas no registro 003.
+2. Scaffold integrado e conexões verificadas; seis tabelas no banco antifraude, MLflow 2.19.0 separado em 5001 e API em 8001.
+3. Pipeline e custo implementados; sete testes passaram.
+4. Cinco modelos concluídos em runs distintas, com curvas, baselines, configuração, métricas por semana e dados de lineage. Uma tentativa técnica anterior falhou antes do treino e está preservada.
+5. Candidato selecionado: Random Forest, corte 0,10; justificativa em comparacao-inicial.md e registro 004. Custo de R$ 18.985,61 nas duas semanas. Sem promoção.
+
+Próximas etapas: monitoramento baseline e relatório zero; referência final, registro da versão, paridade de API e empacotamento da entrega.

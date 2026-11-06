@@ -1,5 +1,6 @@
 """Rodada pré-definida E01–E05; não promove modelos automaticamente."""
 import sys
+sys.stdout.reconfigure(encoding="utf-8")
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import json, time, subprocess
@@ -25,7 +26,12 @@ def main():
     modelos=[("E01",LogisticRegression(max_iter=1000,random_state=42),True), ("E02",DecisionTreeClassifier(max_depth=8,min_samples_leaf=50,random_state=42),False), ("E03",RandomForestClassifier(n_estimators=150,max_depth=12,min_samples_leaf=20,n_jobs=2,random_state=42),False), ("E04",ExtraTreesClassifier(n_estimators=150,max_depth=12,min_samples_leaf=20,n_jobs=2,random_state=42),False), ("E05",HistGradientBoostingClassifier(max_iter=150,max_leaf_nodes=15,l2_regularization=1,random_state=42),False)]
     out=Path("docs/evidencias");out.mkdir(parents=True,exist_ok=True)
     artifacts=Path("artefatos/experimentos");artifacts.mkdir(parents=True,exist_ok=True)
-    mlflow.set_tracking_uri(config.MLFLOW_TRACKING_URI); mlflow.set_experiment("aurora_parte1_comparacao")
+    mlflow.set_tracking_uri(config.MLFLOW_TRACKING_URI); nome_experimento="aurora_parte1_comparacao_v2"
+    if mlflow.get_experiment_by_name(nome_experimento) is None:
+        destino=Path.home()/".codex/aurora-artifacts"
+        destino.mkdir(parents=True,exist_ok=True)
+        mlflow.create_experiment(nome_experimento,artifact_location=destino.as_uri())
+    mlflow.set_experiment(nome_experimento)
     commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
     registros=[]
     for nome,modelo,escalar in modelos:

@@ -16,3 +16,11 @@ Reprodução: `python scripts/auditar_historico.py <caminho-do-zip>`. Dependênc
 Resultados preliminares: não provam ausência de vazamento na construção das features, nem confirmam a semântica de todos os cálculos históricos. Nenhum modelo treinado. Auditar intervalos temporais de rótulos, consistência das semanas e disponibilidade das features antes de declarar auditoria completa.
 
 Estes resultados devem ser resumidos na seção 1 do notebook e copiados para a documentação exportada na entrega.
+
+## Complemento temporal
+
+O arquivo auditoria-temporal.json registra 200.887 linhas em treino e 39.497 em validação. As semanas são consecutivas, de 01/06/2026 a 23/08/2026, sem sobreposição dos intervalos semanais observados. Nenhuma contestação de fraude inválida ou anterior à transação; atrasos observados entre aproximadamente zero e sete dias. Isso não implica que o lote esteja completo antes do encerramento definido pelo negócio.
+
+Há 22.674 clientes presentes em treino e validação. Repetição de cliente é compatível com prever transações futuras da base existente; não substituímos o corte temporal exigido por uma divisão por cliente. id_cliente permanece fora das features. Generalização para clientes inéditos é uma questão distinta, não demonstrada por esse resultado.
+
+Não foram identificadas razões para excluir ou imputar linhas nas verificações executadas. A disponibilidade histórica de médias, contagens e distâncias não pode ser reconstruída apenas com este pacote: usar as features fornecidas segundo o contrato e declarar a limitação, sem afirmar ausência comprovada de vazamento upstream.

@@ -19,3 +19,12 @@ Modelo de entrada:
 ---
 
 <!-- Escreva a sua primeira entrada (v1.0.0) abaixo desta linha. -->
+
+## v0.1.0 — 06/11/2026
+- **Tipo:** pipeline
+- **Versão no MLflow:** ainda sem versão de registry; runs E01–E05 em aurora_parte1_comparacao_v2.
+- **O que mudou:** auditoria, aplicação integrada, custo, Pipeline e comparação de cinco famílias.
+- **Por quê:** preparar decisão por custo com hipóteses e tentativas documentadas.
+- **Evidência:** docs/evidencias/experimentos-iniciais.json e comparacao-inicial.md; run selecionada ff48c43154624ec9a1e3d16688909ef3.
+- **Impacto:** candidato Random Forest a 0,10 custou R$ 18.985,61 em 11–12, contra R$ 225.349,79 da regra Pix. Nenhuma produção alterada.
+- **Retreinou?** treinamento inicial de cinco famílias; promoção pendente. v1.0.0 será registrada quando os requisitos de produção forem cumpridos.
