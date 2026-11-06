@@ -20,3 +20,5 @@ entrega_parte1_*.zip
 .pytest_cache/
 
 *.log
+
+resultados_reproducao/

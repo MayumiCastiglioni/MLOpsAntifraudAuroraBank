@@ -27,6 +27,7 @@ Entrega informada no material: **11/11/2026 às 23h59**, horário de Brasília.
 - [Arquitetura proposta](docs/arquitetura.md)
 - [Conceitos e pegadinhas](docs/conceitos-e-pegadinhas.md)
 - [Plano de implementação](docs/plano-de-implementacao.md)
+- [Notebook reproduzível e pasta de entrega](docs/reproducao-e-entrega.md)
 - [Resultados e justificativa da comparação](docs/evidencias/comparacao-inicial.md)
 - [Protocolo de experimentos e evidências para entrega](docs/experimentos.md)
 - [Decisões](docs/decisoes/README.md)
