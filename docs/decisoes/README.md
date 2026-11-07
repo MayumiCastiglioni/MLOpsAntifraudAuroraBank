@@ -11,3 +11,5 @@ Use arquivos NNN-titulo.md. Estados: proposta, aceita ou substituída. Informe c
 - [004 — Escolha inicial](004-escolha-inicial.md): aceita para candidato; promoção pendente.
 
 - [005 — Notebook reproduzível](005-notebook-reproduzivel.md): aceita.
+
+- [006 — Monitoramento e rótulos atrasados](006-monitoramento-rotulos-atrasados.md): aceita.

@@ -1,4 +1,4 @@
-"""Custo de negócio e métricas reutilizáveis. Drift será implementado na etapa 6."""
+"""Monitoramento reutilizável: qualidade, drift, operação e rótulos atrasados."""
 import numpy as np
 from sklearn.metrics import average_precision_score, precision_score, recall_score
 
@@ -19,3 +19,124 @@ def medir(real, score, valores, threshold):
         raise ValueError("Scores e threshold devem ser finitos entre zero e um")
     b = s >= threshold
     return dict(custo=custo(y,b,v), recall=float(recall_score(y,b,zero_division=0)), precision=float(precision_score(y,b,zero_division=0)), average_precision=float(average_precision_score(y,s)), legitimas_bloqueadas=int(((y==0)&b).sum()), fraude_perdida=float(v[(y==1)&~b].sum()), taxa_bloqueio=float(b.mean()))
+
+
+# Estas funções não escolhem limites de alerta nem retreinam modelos.
+import pandas as pd
+from scipy.stats import ks_2samp
+
+
+def _scores(df, coluna="score"):
+    if df.empty:
+        raise ValueError("Lote vazio")
+    s = pd.to_numeric(df[coluna], errors="coerce").to_numpy(dtype=float)
+    if not np.isfinite(s).all() or ((s < 0) | (s > 1)).any():
+        raise ValueError("Scores devem estar completos e entre zero e um")
+    return s
+
+
+def drift_continuas(referencia, lote, colunas):
+    """KS com D/p-valor; nulos e não finitos são contabilizados separadamente."""
+    linhas = []
+    for coluna in colunas:
+        ref = pd.to_numeric(referencia[coluna], errors="coerce").to_numpy(dtype=float)
+        atual = pd.to_numeric(lote[coluna], errors="coerce").to_numpy(dtype=float)
+        a, b = ref[np.isfinite(ref)], atual[np.isfinite(atual)]
+        teste = ks_2samp(a, b) if len(a) and len(b) else None
+        linhas.append(dict(feature=coluna, n_referencia=len(a), n_lote=len(b),
+                           invalidos_referencia=int((~np.isfinite(ref)).sum()),
+                           invalidos_lote=int((~np.isfinite(atual)).sum()),
+                           D=float(teste.statistic) if teste else np.nan,
+                           p_valor=float(teste.pvalue) if teste else np.nan,
+                           status="calculado" if teste else "sem_amostra_valida"))
+    return pd.DataFrame(linhas)
+
+
+def drift_categoricas(referencia, lote, colunas):
+    """Proporções alinhadas e distância de variação total (0–1).
+
+    Inclui categorias novas e ausentes; não depende de aproximação qui-quadrado.
+    A categoria nula usa chave própria, sem confundir ausência com texto literal.
+    """
+    linhas = []
+    for coluna in colunas:
+        def distribuicao(df):
+            return df[coluna].map(lambda x: ("ausente", "") if pd.isna(x) else ("valor", str(x))).value_counts(normalize=True)
+        a, b = distribuicao(referencia), distribuicao(lote)
+        chaves = a.index.union(b.index)
+        pa, pb = a.reindex(chaves, fill_value=0), b.reindex(chaves, fill_value=0)
+        tv = float(np.abs(pa-pb).sum()/2) if len(referencia) and len(lote) else np.nan
+        for chave in chaves:
+            linhas.append(dict(feature=coluna, categoria=chave[1], ausente=chave[0]=="ausente",
+                               proporcao_referencia=float(pa.at[chave]), proporcao_lote=float(pb.at[chave]),
+                               diferenca_pp=float(100*(pb.at[chave]-pa.at[chave])),
+                               variacao_total=tv, categoria_nova=chave not in a.index,
+                               status="calculado" if np.isfinite(tv) else "sem_amostra"))
+    return pd.DataFrame(linhas)
+
+
+def saida_operacional(lote, threshold):
+    """Mede a política informada; não infere o corte nem usa rótulos."""
+    if not np.isfinite(threshold) or not 0 <= threshold <= 1:
+        raise ValueError("Threshold inválido")
+    score = _scores(lote)
+    valores = pd.to_numeric(lote.valor_transacao, errors="coerce").to_numpy(dtype=float)
+    if not np.isfinite(valores).all() or (valores < 0).any():
+        raise ValueError("Valores inválidos")
+    bloqueio = score >= threshold
+    return pd.DataFrame([dict(transacoes=len(lote), threshold=threshold,
+                              bloqueadas=int(bloqueio.sum()), taxa_bloqueio=float(bloqueio.mean()),
+                              valor_bloqueado=float(valores[bloqueio].sum()))])
+
+
+def performance_rotulada(lote, threshold, segmento="canal", rotulos_fechados=False):
+    """Custos observados são parciais até cobertura 100% E fechamento explícito.
+
+    Só avalia linhas com classe explícita. Sem fraudes, recall e AP são
+    indefinidos; sem bloqueios, precision é indefinida. Não imputar zero.
+    """
+    saida_operacional(lote, threshold)  # valida todos os scores e valores
+    if "fraude" not in lote:
+        lote = lote.assign(fraude=np.nan)
+    presentes = lote.fraude.notna()
+    if not lote.loc[presentes, "fraude"].isin([0, 1]).all():
+        raise ValueError("Rótulos presentes devem ser binários")
+    grupos = [("global", "todos", lote)]
+    grupos += [(segmento, str(k), g) for k, g in lote.groupby(segmento, dropna=False)]
+    linhas = []
+    for escopo, grupo, df in grupos:
+        conhecido = df[df.fraude.notna()]
+        cobertura = len(conhecido)/len(df)
+        completo = cobertura == 1 and bool(rotulos_fechados)
+        linha = dict(escopo=escopo, segmento=grupo, transacoes=len(df), rotuladas=len(conhecido),
+                     cobertura=cobertura, rotulos_fechados=bool(rotulos_fechados),
+                     status="final" if completo else "parcial" if len(conhecido) else "sem_rotulos",
+                     custo_observado=np.nan, custo_final=np.nan, recall=np.nan,
+                     precision=np.nan, average_precision=np.nan, fraudes_observadas=0)
+        if len(conhecido):
+            y = conhecido.fraude.to_numpy(dtype=int)
+            s = conhecido.score.to_numpy(dtype=float)
+            bloqueio = s >= threshold
+            c = custo(y, bloqueio, conhecido.valor_transacao)
+            n_fraudes = int((y == 1).sum())
+            linha.update(custo_observado=c, custo_final=c if completo else np.nan,
+                         fraudes_observadas=n_fraudes,
+                         recall=float(recall_score(y, bloqueio)) if n_fraudes else np.nan,
+                         precision=float(precision_score(y, bloqueio, zero_division=0)) if bloqueio.any() else np.nan,
+                         average_precision=float(average_precision_score(y,s)) if n_fraudes else np.nan)
+        linhas.append(linha)
+    return pd.DataFrame(linhas)
+
+
+def monitorar(referencia, lote, contrato, threshold, segmento="canal", rotulos_fechados=False):
+    """Recebe tabelas (por exemplo, CSV exportado da API) e devolve relatórios.
+
+    Contagens discretas, booleanas e hora usam proporções; floats e score usam
+    KS. Não produz veredito de incidente nem custo sem fechamento de rótulos.
+    """
+    continuas = [f["nome"] for f in contrato["features"] if f["tipo"] == "float"] + ["score"]
+    categoricas = [f["nome"] for f in contrato["features"] if f["tipo"] != "float"]
+    return dict(continuas=drift_continuas(referencia,lote,continuas),
+                categoricas=drift_categoricas(referencia,lote,categoricas),
+                operacional=saida_operacional(lote,threshold),
+                performance=performance_rotulada(lote,threshold,segmento,rotulos_fechados))

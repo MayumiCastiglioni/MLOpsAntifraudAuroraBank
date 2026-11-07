@@ -1,0 +1,9 @@
+{
+  "data": "2026-11-07",
+  "comando": "python -m unittest discover -s tests",
+  "testes": 15,
+  "falhas": 0,
+  "erros": 0,
+  "novos_casos_monitoramento": 8,
+  "escopo": "testes controlados; sem relatorio zero ou integracao em producao"
+}

@@ -2,7 +2,7 @@
 
 Construção e operação de um modelo antifraude para Pix, cartão presencial e cartão online, com decisões justificadas pelo custo de negócio.
 
-**Status:** auditoria, ambiente, Pipeline e comparação inicial concluídos. Candidato selecionado: Random Forest, corte 0,10. Monitoramento baseline e promoção ainda pendentes.
+**Status:** auditoria, ambiente, Pipeline e comparação inicial concluídos. Candidato selecionado: Random Forest, corte 0,10. Funções de monitoramento implementadas e testadas; relatório zero, limites de alerta e promoção ainda pendentes.
 
 ## Objetivo
 
@@ -27,6 +27,8 @@ Entrega informada no material: **11/11/2026 às 23h59**, horário de Brasília.
 - [Arquitetura proposta](docs/arquitetura.md)
 - [Conceitos e pegadinhas](docs/conceitos-e-pegadinhas.md)
 - [Plano de implementação](docs/plano-de-implementacao.md)
+- [Status das etapas restantes](docs/status-etapas.md)
+- [Monitoramento implementado](docs/monitoramento.md)
 - [Notebook reproduzível e pasta de entrega](docs/reproducao-e-entrega.md)
 - [Resultados e justificativa da comparação](docs/evidencias/comparacao-inicial.md)
 - [Protocolo de experimentos e evidências para entrega](docs/experimentos.md)
