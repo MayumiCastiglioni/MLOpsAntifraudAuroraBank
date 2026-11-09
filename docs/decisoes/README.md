@@ -13,3 +13,5 @@ Use arquivos NNN-titulo.md. Estados: proposta, aceita ou substituída. Informe c
 - [005 — Notebook reproduzível](005-notebook-reproduzivel.md): aceita.
 
 - [006 — Monitoramento e rótulos atrasados](006-monitoramento-rotulos-atrasados.md): aceita.
+
+- [007 — Relatório zero e limites de alerta](007-relatorio-zero-e-alertas.md): relatório concluído; limites pendentes de decisão humana.
