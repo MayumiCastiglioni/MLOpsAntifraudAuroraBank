@@ -17,3 +17,5 @@ Use arquivos NNN-titulo.md. Estados: proposta, aceita ou substituída. Informe c
 - [007 — Relatório zero e limites de alerta](007-relatorio-zero-e-alertas.md): relatório concluído; limites pendentes de decisão humana.
 
 - [008 — Referência E03 preparada localmente](008-referencia-mlflow-indisponivel.md): anexação pendente do serviço MLflow.
+
+- [009 — Registro e promoção E03](009-promocao-e03.md): concluída após aprovação.
