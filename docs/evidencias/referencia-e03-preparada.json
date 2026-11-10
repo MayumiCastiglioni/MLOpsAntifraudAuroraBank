@@ -1,0 +1,75 @@
+{
+  "run_id": "ff48c43154624ec9a1e3d16688909ef3",
+  "modelo": "E03 RandomForestClassifier",
+  "threshold": 0.1,
+  "semanas": [
+    11,
+    12
+  ],
+  "linhas": 39497,
+  "colunas": [
+    "id_transacao",
+    "semana",
+    "valor_transacao",
+    "hora_transacao",
+    "dia_semana",
+    "canal",
+    "dispositivo_novo",
+    "qtd_transacoes_1h",
+    "valor_medio_30d",
+    "razao_valor_media",
+    "distancia_ultima_transacao_km",
+    "idade_conta_dias",
+    "destinatario_novo",
+    "categoria_estabelecimento",
+    "uf_cliente",
+    "score",
+    "bloqueada",
+    "fraude"
+  ],
+  "features": [
+    "valor_transacao",
+    "hora_transacao",
+    "dia_semana",
+    "canal",
+    "dispositivo_novo",
+    "qtd_transacoes_1h",
+    "valor_medio_30d",
+    "razao_valor_media",
+    "distancia_ultima_transacao_km",
+    "idade_conta_dias",
+    "destinatario_novo",
+    "categoria_estabelecimento",
+    "uf_cliente"
+  ],
+  "linhagem": {
+    "transacoes_sha256": "2a21363ee7499a646dd0e04288bba0b81abf87aad4a34c8b299564664a641414",
+    "rotulos_sha256": "bafda7607bd7dc6b724a757aea94c384f1f155d051880cebfc64e6aca0d4c75f",
+    "referencia_sha256": "6d75598cff4313615cca4c89d85e81214051267b9e0ccea542875d45d3057e8f"
+  },
+  "metricas_por_semana": {
+    "11": {
+      "n": 20399,
+      "custo": 11019.250000000002,
+      "recall": 0.8252427184466019,
+      "precision": 0.4885057471264368,
+      "average_precision": 0.8102810398506569,
+      "legitimas_bloqueadas": 267,
+      "fraude_perdida": 7014.250000000002,
+      "taxa_bloqueio": 0.02558948968086671,
+      "accuracy": 0.9842639345065934
+    },
+    "12": {
+      "n": 19098,
+      "custo": 7966.36,
+      "recall": 0.8384879725085911,
+      "precision": 0.5339168490153173,
+      "average_precision": 0.8160674390361454,
+      "legitimas_bloqueadas": 213,
+      "fraude_perdida": 4771.36,
+      "taxa_bloqueio": 0.02392920724683213,
+      "accuracy": 0.9863860090061787
+    }
+  },
+  "status": "validada_local; log_artifact na run MLflow pendente por indisponibilidade do Postgres backend"
+}
