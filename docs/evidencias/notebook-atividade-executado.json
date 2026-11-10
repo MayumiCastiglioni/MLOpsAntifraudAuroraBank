@@ -1,0 +1,10 @@
+{
+  "data": "2026-11-10",
+  "notebook": "parte1.ipynb",
+  "kernel": "Aurora MLOps (Python 3.11)",
+  "celulas_de_codigo": 27,
+  "celulas_de_codigo_com_conteudo": 14,
+  "celulas_com_execucao": 14,
+  "erros": [],
+  "resultado": "executado sem erros; checklist do empacotador aprovado"
+}

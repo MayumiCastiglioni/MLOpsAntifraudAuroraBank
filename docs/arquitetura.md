@@ -1,6 +1,6 @@
 # Arquitetura proposta
 
-Estado: arquitetura inicial integrada e validada parcialmente em 06/11/2026. App, contrato, SQL, Pipeline e custo estão na raiz. Comparação em execução; monitoramento completo e promoção ainda pendentes.
+Estado em 10/11/2026: arquitetura implementada e verificada com comparação, monitoramento, referência, registry, alias champion e paridade da API. A promoção é a primeira versão do projeto (`antifraude` v1).
 
 ## Fluxo
 
@@ -28,4 +28,4 @@ Escolher pelo custo com baselines no mesmo conjunto. Registrar custo por semana 
 
 Separar disponibilidade, contrato, drift e performance. Monitorar entradas e scores antes dos rótulos; medir custo real apenas com cobertura informada. Não confundir repontuação com decisões originais. Preservar evidências por versão e semana.
 
-Tratamento inicial de dados documentado no registro 003. A escolha do candidato será registrada após a comparação; limites de alerta e promoção permanecem pendentes.
+Tratamento e decisões estão registrados nos ADRs 003–010. Alertas de magnitude solicitam investigação; a API carrega o alias champion e o threshold tagueado na versão.

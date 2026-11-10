@@ -35,7 +35,7 @@ Tentativa técnica anterior E01: falha antes do treino por URI de artefatos e co
 
 ## Limitações
 
-A seleção e o corte usam as mesmas semanas 11–12: não é teste independente nem garantia futura. Nenhuma promoção foi feita. Ainda faltam monitoramento baseline, registro de versão, paridade de API e entrega final. O threshold global é uma simplificação exigida; o custo varia com o valor das transações.
+A seleção e o corte usam as mesmas semanas 11–12: não é teste independente nem garantia futura. A promoção posterior foi aprovada e documentada no registro 009; monitoramento, paridade da API e pacote estão concluídos. O threshold global é uma simplificação exigida; o custo varia com o valor das transações.
 
 ![Curvas de custo](custo-por-threshold.png)
 

@@ -1,6 +1,6 @@
 # 006 — Monitoramento e rótulos atrasados
 
-Data: 07/11/2026. Estado: aceita para implementação; limites de alerta pendentes.
+Data: 07/11/2026. Estado: implementação aceita e concluída; os limites foram decididos depois no registro 007.
 
 ## Contexto
 
@@ -14,4 +14,4 @@ Medir custo apenas com rótulos conhecidos, identificado como observado/parcial.
 
 ## Evidência e consequências
 
-15 testes passaram, incluindo oito cenários novos em tests/test_monitoramento.py. Não definimos alertas nem comparamos semanas reais nesta etapa. Drift não dispara retreino. A próxima etapa é o relatório zero; promoção e pacote integral ainda pendentes.
+15 testes passaram, incluindo oito cenários novos em tests/test_monitoramento.py. Não definimos alertas nem comparamos semanas reais nesta etapa. Drift não dispara retreino. O relatório zero, promoção, paridade da API e pacote integral foram concluídos em etapas posteriores e têm evidências próprias.

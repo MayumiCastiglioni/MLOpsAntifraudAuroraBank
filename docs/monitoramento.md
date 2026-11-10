@@ -1,6 +1,6 @@
 # Monitoramento — etapa 1
 
-Implementação concluída em 07/11/2026. Evidência: 15 testes passaram (sete anteriores e oito de monitoramento). Relatório zero e escolha de limites continuam pendentes.
+Implementação concluída em 07/11/2026. Em 10/11, o relatório zero das semanas 11–12 foi executado e a política de alertas foi aprovada. Evidências em `docs/evidencias/relatorio-zero-semanas-11-12.json` e decisão 007.
 
 ## Interface
 
@@ -23,7 +23,7 @@ Scores e valores devem estar completos e válidos para operação/performance. O
 
 Casos novos: rótulo parcial sem imputação; fechamento explícito; ausência total de rótulos; operação sem rótulos e igualdade ao corte; categoria nova/ausente; KS sem mudança com ausência informada; segmento sem fraude; rótulo inválido.
 
-Não houve comparação das semanas 11–12 nesta etapa, definição de alertas, retreino, promoção ou modificação do pacote de entrega anterior. Esses passos têm estados próprios.
+O relatório zero e os limites de alerta foram registrados em etapas próprias. Drift solicita investigação humana; não dispara retreino, promoção ou alteração do modelo.
 
 ## Política inicial escolhida
 

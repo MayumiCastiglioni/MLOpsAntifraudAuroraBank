@@ -1,14 +1,24 @@
-# Status das etapas restantes
+# Status e planejamento da entrega
 
-Atualizado em 10/11/2026. Trabalho sequencial solicitado pelo usuário: concluir e reportar uma etapa antes da próxima.
+Atualizado em 10/11/2026. **Conclusão técnica: 100% (10 de 10 blocos da entrega concluídos).** A pasta e o ZIP foram gerados e inspecionados sem avisos. A única ação restante está fora do repositório: anexar o ZIP na atividade da escola.
 
-| Etapa | Status | Evidência ou pendência |
+## Etapas
+
+| Etapa | Status | Evidência ou resultado |
 |---|---|---|
-| 1. Implementar monitoramento | Concluída e testada | monitoramento.py, tests/test_monitoramento.py; 15 testes passaram |
-| 2. Relatório zero e limites de alerta | Concluída; política investigativa escolhida em 10/11 | KS D ≥ 0,10 ou variação total ≥ 0,10 gera investigação humana; sem retreino ou alteração automática. Limites provisórios, ancorados em uma única comparação |
-| 3. Referência final do modelo | Concluída | CSV e manifesto anexados em `referencia/` à run E03 ff48c43154624ec9a1e3d16688909ef3; download confirmado pelo mesmo SHA-256 |
-| 4. Registrar e promover | Concluída em 10/11/2026 após aprovação explícita | `antifraude` v1, threshold 0,10, tags `threshold`/`motivo`, descrição; alias `champion` aponta para v1. Evidência `docs/evidencias/promocao-e03.json` |
-| 5. Paridade com API | Concluída em 10/11/2026 | API local respondeu cinco transações da semana 12; scores idênticos após arredondamento a seis casas; v1 e threshold 0,10 confirmados. Evidência `docs/evidencias/paridade-api-e03.json` |
-| 6. Entrega integral | Pendente | Completar notebook, changelog v1.0.0 e exportação final |
+| 1. Implementar monitoramento | Concluída e verificada | `monitoramento.py`; 15 testes da etapa original; tratamento de rótulo atrasado e métricas globais/por canal |
+| 2. Relatório zero e limites | Concluída | Comparação 11→12; política investigativa: KS D ≥ 0,10 ou variação total ≥ 0,10; sem retreino nem troca automática |
+| 3. Referência | Concluída | 39.497 linhas, features, scores e rótulos anexados à run E03; SHA-256 conferido |
+| 4. Registrar e promover | Concluída após aprovação humana | `antifraude` v1, `champion`, threshold 0,10, motivo e descrição |
+| 5. Paridade da API | Concluída | Cinco previsões da semana 12 coincidem com o modelo na precisão publicada e nas decisões |
+| 6. Notebook, changelog e pacote | Concluída | Notebook da atividade executado sem erros; changelog v1.0.0; ZIP íntegro, sem avisos, credenciais ou logs |
 
-A análise e o notebook de seleção anteriores continuam concluídos. O pacote local anterior é uma entrega de análise, não a entrega integral da atividade. Os testes da etapa 1 usam exemplos controlados; não equivalem ao relatório zero nem à integração em produção.
+## Planejamento restante
+
+Não há implementação pendente nesta entrega. Anexar `entrega_parte1_mayumi_castiglioni_<timestamp>.zip` à atividade até o prazo informado no material. Após a entrega, as próximas ações dependem de novas semanas: enviar lotes, registrar rótulos quando fecharem e investigar alertas. Não retreinar nem alterar o champion automaticamente.
+
+O artefato local final está em pasta com nome `entrega/parte1_final_<timestamp>/`. O notebook exportado contém 14 células de código com conteúdo executadas e nenhuma célula com erro; células vazias de espaço de resposta permanecem sem execução. Evidência: `docs/evidencias/notebook-atividade-executado.json`.
+
+## Limitações mantidas explícitas
+
+As semanas 11–12 foram usadas para seleção e não são um teste independente. A paridade da API é uma checagem de cinco transações, não um teste de carga. O limite de drift é provisório e tem apenas uma comparação de referência. O projeto não demonstra ausência de vazamento nas features históricas upstream nem garante desempenho futuro.

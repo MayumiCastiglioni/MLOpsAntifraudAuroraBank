@@ -12,4 +12,4 @@ Antes do alias, carregamos a versão pelo número, conferimos identidade do mode
 
 ## Limites
 
-A seleção usa semanas 11–12, que não são teste independente. A promoção configura o Registry; a paridade do endpoint FastAPI é verificada na etapa seguinte. A troca não altera o threshold original do código: a aplicação lê o tag versionado.
+A seleção usa semanas 11–12, que não são teste independente. A promoção configura o Registry; a paridade do endpoint FastAPI foi verificada em `010-paridade-api-e03.md`. A aplicação lê o threshold versionado na tag da versão.

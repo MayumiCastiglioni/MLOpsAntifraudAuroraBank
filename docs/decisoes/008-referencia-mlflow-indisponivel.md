@@ -10,6 +10,6 @@ O usuário pediu prosseguir com a referência do modelo. Reutilizamos o artefato
 
 Após o usuário iniciar o container `pg`, reiniciamos o MLflow 2.19.0 no endpoint local já configurado. Anexamos o CSV e manifesto à mesma run E03, sob `referencia/`, confirmamos os dois caminhos via MlflowClient e baixamos o CSV novamente. O SHA-256 baixado coincide com o manifesto local. Sem retreino e sem mudança de alias.
 
-## Próximo passo
+## Desfecho
 
-Registrar candidato/política e discutir promoção de `champion` separadamente; a troca de produção aguarda validação humana.
+A referência está anexada à run que originou `antifraude` v1. A promoção aprovada pela usuária está em `009-promocao-e03.md`; a API foi conferida em `010-paridade-api-e03.md`.

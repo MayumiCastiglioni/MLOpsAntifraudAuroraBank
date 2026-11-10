@@ -2,7 +2,7 @@
 
 Construção e operação de um modelo antifraude para Pix, cartão presencial e cartão online, com decisões justificadas pelo custo de negócio.
 
-**Status:** auditoria, ambiente, Pipeline e comparação inicial concluídos. Candidato selecionado: Random Forest, corte 0,10. Funções de monitoramento implementadas e testadas; relatório zero, limites de alerta e promoção ainda pendentes.
+**Status:** entrega técnica completa e empacotada. `antifraude@champion` aponta para Random Forest E03 v1, corte 0,10. O ZIP final está em `entrega_parte1_mayumi_castiglioni_<timestamp>.zip` e foi verificado sem avisos; resta anexá-lo à atividade escolar.
 
 ## Objetivo
 
@@ -27,7 +27,9 @@ Entrega informada no material: **11/11/2026 às 23h59**, horário de Brasília.
 - [Arquitetura proposta](docs/arquitetura.md)
 - [Conceitos e pegadinhas](docs/conceitos-e-pegadinhas.md)
 - [Plano de implementação](docs/plano-de-implementacao.md)
-- [Status das etapas restantes](docs/status-etapas.md)
+- [Status e planejamento da entrega](docs/status-etapas.md)
+- Notebook preenchido da atividade: `parte1.ipynb`
+- Notebook executado de auditoria e comparação reproduzível: `notebooks/01_analise_e_escolha.ipynb`
 - [Monitoramento implementado](docs/monitoramento.md)
 - [Notebook reproduzível e pasta de entrega](docs/reproducao-e-entrega.md)
 - [Resultados e justificativa da comparação](docs/evidencias/comparacao-inicial.md)

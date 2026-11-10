@@ -14,4 +14,4 @@ Criar snapshot local autossuficiente em entrega/, com módulos, contrato, CSVs o
 
 ## Consequências
 
-Rodada repetida com as mesmas configurações para verificar reprodutibilidade; não é nova evidência de generalização. A comparação com custos e cortes originais deve passar, e o resumo é produzido das métricas calculadas. Código, notebook e documentação ficam no Git; dados e cópia local de entrega continuam ignorados. Monitoramento, promoção e teste de API seguem pendentes.
+Rodada repetida com as mesmas configurações para verificar reprodutibilidade; não é nova evidência de generalização. A comparação com custos e cortes originais deve passar, e o resumo é produzido das métricas calculadas. Código, notebook e documentação ficam no Git; dados e cópia local de entrega continuam ignorados. Na data deste registro, monitoramento, promoção e teste de API ainda estavam pendentes; foram concluídos em etapas posteriores (registros 007–010).
