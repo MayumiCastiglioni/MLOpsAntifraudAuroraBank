@@ -12,7 +12,7 @@ Rodada executada em 06/11/2026, configurações definidas previamente em docs/ex
 
 ## Escolha
 
-Escolha para a próxima etapa: E03 (RandomForestClassifier), corte 0.10, pelo menor custo agregado observado. Custo total de R$ 18985.61 em duas semanas, média de R$ 9492.81/semana. Economia contra a regra Pix: R$ 206364.18 (91.58%). Legítimas bloqueadas: 480 transações (não clientes únicos). Fraude monetária aprovada: R$ 11785.61.
+Candidata selecionada e posteriormente promovida: E03 (RandomForestClassifier), corte 0.10, pelo menor custo agregado observado. Custo total de R$ 18985.61 em duas semanas, média de R$ 9492.81/semana. Economia contra a regra Pix: R$ 206364.18 (91.58%). Legítimas bloqueadas: 480 transações, afetando 476 clientes distintos nas duas semanas (dois aparecem em ambas). Fraude monetária aprovada: R$ 11785.61.
 
 - Semana 11: custo R$ 11019.25; 267 legítimas bloqueadas; fraude perdida R$ 7014.25.
 - Semana 12: custo R$ 7966.36; 213 legítimas bloqueadas; fraude perdida R$ 4771.36.

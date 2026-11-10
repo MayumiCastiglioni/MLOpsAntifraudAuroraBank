@@ -88,14 +88,21 @@ def preparar() -> tuple[Path, Path, dict]:
         avisos.append("SHA-256 da referência local diverge do manifesto validado")
 
     # Confere serviço e paridade no momento em que o pacote é montado.
+    status_api_modelo: dict = {}
     try:
         with urllib.request.urlopen(f"{config.SISTEMA_URL}/saude", timeout=10) as resposta:
             saude = json.loads(resposta.read().decode("utf-8"))
+        with urllib.request.urlopen(f"{config.SISTEMA_URL}/api/modelo", timeout=10) as resposta:
+            status_api_modelo = json.loads(resposta.read().decode("utf-8"))
         status_modelo = saude.get("modelo", {})
         if str(status_modelo.get("versao")) != str(champion.version):
             avisos.append("API e alias champion apontam para versões diferentes")
         if not status_modelo.get("ok"):
             avisos.append("API reportou modelo indisponível")
+        if (str(status_api_modelo.get("modelo", {}).get("versao")) != str(champion.version)
+                or float(status_api_modelo.get("modelo", {}).get("threshold", -1))
+                != float(champion.tags.get(config.TAG_THRESHOLD, -2))):
+            avisos.append("página Modelo da API e alias champion divergem")
 
         contrato = yaml.safe_load((ROOT / "contrato/contrato_features.yaml").read_text(encoding="utf-8"))
         features = nomes_features(contrato)
@@ -143,11 +150,27 @@ def preparar() -> tuple[Path, Path, dict]:
         origem = ROOT / diretorio
         shutil.copytree(origem, pasta / diretorio, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
 
+    # Preserve outputs from the latest full notebook reproduction, including
+    # the five model result files, threshold curves, data hashes, and summary.
+    evidencia_repro = ROOT / "docs/evidencias/notebook-reproduzido.json"
+    if evidencia_repro.exists():
+        reproducao = json.loads(evidencia_repro.read_text(encoding="utf-8"))
+        origem_resultados = ROOT / reproducao["pasta"]
+        if origem_resultados.is_dir() and origem_resultados.resolve().is_relative_to(
+            (ROOT / "resultados_reproducao").resolve()
+        ):
+            destino_resultados = pasta / "resultados_reproducao" / origem_resultados.name
+            shutil.copytree(origem_resultados, destino_resultados)
+        else:
+            avisos.append("resultados da última execução reproduzível não foram encontrados")
+    else:
+        avisos.append("manifesto da última execução reproduzível não foi encontrado")
+
     resumo = (ROOT / "docs/evidencias/resumo-escolha-reproduzida.md")
     if resumo.exists():
         arquivos_incluidos.append(copiar_arquivo(pasta, "docs/evidencias/resumo-escolha-reproduzida.md", "RESUMO_ESCOLHA.md"))
 
-    leia_primeiro = """# Entrega final — Banco Aurora\n\nAutora: Mayumi Castiglioni. O pacote reúne notebook da atividade, notebook executado de auditoria e comparação, código, contrato, dados fornecidos, referência e evidências da versão promovida.\n\n## Ordem de leitura\n\n1. `parte1.ipynb` — respostas, evidências e verificação de operação.\n2. `RESUMO_ESCOLHA.md` — escolha em linguagem de custo.\n3. `documentacao/decisoes/` e `documentacao/evidencias/` — decisões e rastreabilidade.\n\n## Reprodução\n\nUse Python 3.11 e instale `requirements.reproducao.txt`. Para reproduzir análise e treinos, abra `notebooks/01_analise_e_escolha.ipynb` e execute todas as células. Para refazer as conferências de produção no notebook `parte1.ipynb`, configure `.env` a partir de `.env.exemplo`, inicie Postgres, MLflow e API conforme `documentacao/reproducao-e-entrega.md` e execute as células. A promoção de modelo não é automática.\n\nOs resultados das semanas 11–12 são validação usada na seleção, não teste independente. A política de alerta gera investigação humana; não retreina nem troca modelo ou corte automaticamente.\n"""
+    leia_primeiro = """# Entrega final — Banco Aurora\n\nAutora: Mayumi Castiglioni. O pacote reúne notebook da atividade, notebook executado de auditoria e comparação, resultados e curvas das cinco famílias, código, contrato, dados fornecidos, referência e evidências da versão promovida.\n\n## Ordem de leitura\n\n1. `parte1.ipynb` — respostas, evidências e verificação de operação.\n2. `RESUMO_ESCOLHA.md` — escolha em linguagem de custo.\n3. `resultados_reproducao/` — métricas, curvas, hashes, run_ids e resumo da reprodução integral.\n4. `docs/decisoes/` e `docs/evidencias/` — decisões e rastreabilidade.\n\n## Reprodução\n\nUse Python 3.11 e instale `requirements.reproducao.txt`. Para reproduzir análise e treinos, abra `notebooks/01_analise_e_escolha.ipynb` e execute todas as células. Para refazer as conferências de produção no notebook `parte1.ipynb`, configure `.env` a partir de `.env.exemplo`, inicie Postgres, MLflow e API conforme `docs/reproducao-e-entrega.md` e execute as células. A promoção de modelo não é automática.\n\nOs resultados das semanas 11–12 são validação usada na seleção, não teste independente. A política de alerta gera investigação humana; não retreina nem troca modelo ou corte automaticamente.\n"""
     (pasta / "LEIA_PRIMEIRO.md").write_text(leia_primeiro, encoding="utf-8")
 
     resultado = {
@@ -164,6 +187,7 @@ def preparar() -> tuple[Path, Path, dict]:
         "referencia_mlflow": caminhos_referencia,
         "modelo_exportado": str(Path(caminho_modelo).relative_to(pasta)),
         "api_versao_confirmada": str(saude.get("modelo", {}).get("versao", "")),
+        "api_pagina_modelo": status_api_modelo,
         "paridade_api_5_transacoes": bool(paridade),
         "arquivos_dados_sha256": {str(p.relative_to(pasta)): sha256(p) for p in arquivos_incluidos if "dados" in p.parts},
         "avisos": avisos,
@@ -198,9 +222,17 @@ if __name__ == "__main__":
             "referencia_na_run": any("referencia_e03_semanas_11_12.csv" in x for x in
                                      [a.path for a in client.list_artifacts(current.run_id, "referencia")]),
             "api_servindo_mesma_versao": str(health.get("modelo", {}).get("versao")) == str(current.version),
+            "pagina_modelo_mesma_versao_e_corte": False,
             "dados_locais_disponiveis": (ROOT / "dados/transacoes_semanas_01_12.csv").is_file()
                                          and (ROOT / "dados/rotulos_semanas_01_12.csv").is_file(),
+            "resultados_reproducao_disponiveis": (ROOT / "docs/evidencias/notebook-reproduzido.json").is_file(),
         }
+        with urllib.request.urlopen(f"{config.SISTEMA_URL}/api/modelo", timeout=10) as response:
+            api_model = json.loads(response.read().decode("utf-8"))
+        checks["pagina_modelo_mesma_versao_e_corte"] = (
+            str(api_model.get("modelo", {}).get("versao")) == str(current.version)
+            and float(api_model.get("modelo", {}).get("threshold", -1)) == float(current.tags[config.TAG_THRESHOLD])
+        )
         print(json.dumps({"pre_requisitos_ok": all(checks.values()), "checks": checks}, indent=2, ensure_ascii=False))
         if not all(checks.values()):
             raise SystemExit(1)

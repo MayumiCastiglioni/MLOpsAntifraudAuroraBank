@@ -6,7 +6,7 @@
 
 Foi o menor custo observado entre cinco famílias e 99 cortes por família, nas mesmas semanas 11–12: **R$ 18.985,61** em duas semanas, média de **R$ 9.492,81 por semana**. A regra atual de Pix custou R$ 225.349,79; a economia observada foi **R$ 206.364,18 (91.58%)**. O próprio modelo a 0,5 custou R$ 99.338,94.
 
-O candidato bloqueou 480 transações legítimas, com custo de atrito de R$ 7.200,00, e deixou passar R$ 11.785,61 em fraude. Recall: 83.17%; precision: 50.97%; average precision: 0.8130. As contagens são de transações, não de clientes únicos.
+O candidato bloqueou 480 transações legítimas, com custo de atrito de R$ 7.200,00, e deixou passar R$ 11.785,61 em fraude. Recall: 83.17%; precision: 50.97%; average precision: 0.8130. Foram 480 transações legítimas bloqueadas, afetando 476 clientes distintos nas duas semanas (266 na semana 11 e 212 na semana 12; dois aparecem em ambas). O custo continua sendo por transação, como definido na demanda; `id_cliente` foi usado apenas para calcular pessoas distintas, sem entrar no modelo.
 
 ## Alternativas e motivos de descarte
 
@@ -32,3 +32,8 @@ Execução UTC: 20261106T195635_167250Z. Run selecionada nesta reprodução: `ee
 ## Limitações e próximos passos
 
 As semanas 11–12 foram usadas para escolher modelo e corte: são validação de seleção, não teste independente. A redução observada não é garantia de economia futura. Não demonstramos a ausência de vazamento upstream nas médias e contagens históricas. A política de corte global simplifica custos que dependem do valor de cada transação. As etapas posteriores de monitoramento baseline, limites de alerta, referência, registro/alias champion, paridade com a API e pacote integral estão concluídas e têm evidências em `docs/status-etapas.md`. Este arquivo permanece restrito ao resumo da análise e escolha do candidato.
+
+
+## Clientes legítimos impactados
+
+No threshold 0,10, 480 transações legítimas foram bloqueadas, afetando 476 clientes distintos nas semanas 11–12. O recorte por semana identifica 266 clientes na semana 11 e 212 na semana 12; dois aparecem em ambas. O custo de atrito é calculado por transação (R$ 15), e `id_cliente` não é feature.

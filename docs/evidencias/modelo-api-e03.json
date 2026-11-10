@@ -1,0 +1,19 @@
+{
+  "endpoint": "GET /api/modelo",
+  "verificado_em": "2026-11-10",
+  "modelo": {
+    "ok": true,
+    "versao": "1",
+    "threshold": 0.1,
+    "run_id": "ff48c43154624ec9a1e3d16688909ef3",
+    "descricao": "RandomForestClassifier E03, RandomForest pipeline com pré-processamento do contrato v1.0. Threshold 0.10. Selecionado por menor custo nas semanas de validação 11-12: R$ 18.985,61 em duas semanas, contra R$ 225.349,79 da regra Pix > R$ 1.000. A validação foi usada na seleção; não é teste independente nem garantia de desempenho futuro."
+  },
+  "contrato": "1.0",
+  "ultima_troca": {
+    "trocado_em": "2026-11-10T11:57:43.369",
+    "versao_anterior": null,
+    "versao_nova": "1",
+    "threshold": 0.1,
+    "motivo": "v1.0.0 - menor custo validado entre cinco famílias; promoção aprovada pela usuária em 10/11/2026"
+  }
+}

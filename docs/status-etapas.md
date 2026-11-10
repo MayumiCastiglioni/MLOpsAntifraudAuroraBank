@@ -17,7 +17,7 @@ Atualizado em 10/11/2026. **Conclusão técnica: 100% (10 de 10 blocos da entreg
 
 Não há implementação pendente nesta entrega. Anexar `entrega_parte1_mayumi_castiglioni_<timestamp>.zip` à atividade até o prazo informado no material. Após a entrega, as próximas ações dependem de novas semanas: enviar lotes, registrar rótulos quando fecharem e investigar alertas. Não retreinar nem alterar o champion automaticamente.
 
-O artefato local final está em pasta com nome `entrega/parte1_final_<timestamp>/`. O notebook exportado contém 14 células de código com conteúdo executadas e nenhuma célula com erro; células vazias de espaço de resposta permanecem sem execução. Evidência: `docs/evidencias/notebook-atividade-executado.json`.
+O artefato local final está em pasta com nome `entrega/parte1_final_<timestamp>/`. O notebook exportado contém 15 células de código com conteúdo executadas e nenhuma célula com erro; células vazias de espaço de resposta permanecem sem execução. Evidência: `docs/evidencias/notebook-atividade-executado.json`.
 
 ## Limitações mantidas explícitas
 

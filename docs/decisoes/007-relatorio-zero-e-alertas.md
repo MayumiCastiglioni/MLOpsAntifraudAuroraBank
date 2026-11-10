@@ -8,7 +8,7 @@ Com os CSVs locais e o artefato já registrado da run E03 (`ff48c43154624ec9a1e3
 
 No corte candidato 0,10, semana 12 teve 457 bloqueios (2,39% das transações), R$ 284.305,37 em valor bloqueado e custo final R$ 7.966,36, com recall 0,8385, precision 0,5339 e average precision 0,8161. Custos por canal: cartão online R$ 2.326,41; cartão presencial R$ 2.685,95; Pix R$ 2.954,00.
 
-Entre variáveis contínuas, o maior KS foi score (D=0,009664; p=0,313591). A maior mudança categórica/discreta foi idade_conta_dias (variação total=0,232567); próxima foi uf_cliente (0,021484). Isso sugere investigar mudança de composição de idade das contas, mas não explica causa nem prova impacto na performance. P-valor não deve ser usado sozinho para alerta.
+Entre os cinco testes KS para variáveis contínuas/score, nenhum p-valor foi pequeno (intervalo 0,313591–0,960372); para score, D=0,009664 e p=0,313591. Isso não prova igualdade. Com amostras grandes, diferenças pequenas podem reduzir p-valores sem relevância operacional; D e o impacto também precisam ser examinados. Para categorias/discretas, não calculamos p-valores: comparamos proporções pela variação total. A maior diferença foi idade_conta_dias (0,232567), seguida por uf_cliente (0,021484). O sinal motiva investigação, mas não explica causa nem prova impacto na performance.
 
 ## Opções para limites
 

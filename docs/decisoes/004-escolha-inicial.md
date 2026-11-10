@@ -2,7 +2,7 @@
 
 Data: 06/11/2026. Estado: aceita para selecionar candidato; promoção da mesma configuração foi aprovada e concluída em 10/11/2026 (registro 009).
 
-Escolha para a próxima etapa: E03 (RandomForestClassifier), corte 0.10, pelo menor custo agregado observado. Custo total de R$ 18985.61 em duas semanas, média de R$ 9492.81/semana. Economia contra a regra Pix: R$ 206364.18 (91.58%). Legítimas bloqueadas: 480 transações (não clientes únicos). Fraude monetária aprovada: R$ 11785.61.
+Candidata selecionada e posteriormente promovida: E03 (RandomForestClassifier), corte 0.10, pelo menor custo agregado observado. Custo total de R$ 18985.61 em duas semanas, média de R$ 9492.81/semana. Economia contra a regra Pix: R$ 206364.18 (91.58%). Legítimas bloqueadas: 480 transações, afetando 476 clientes distintos nas duas semanas (dois aparecem em ambas). Fraude monetária aprovada: R$ 11785.61.
 
 Alternativas: cinco famílias do protocolo. Evidência: docs/evidencias/experimentos-iniciais.json, curvas e runs listadas no relatório.
 
