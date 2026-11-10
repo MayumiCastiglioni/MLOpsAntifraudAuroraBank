@@ -1187,6 +1187,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1198,6 +1199,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1209,6 +1211,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1220,6 +1223,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1231,6 +1235,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1242,6 +1247,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1253,6 +1259,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1264,6 +1271,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1275,6 +1283,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1286,6 +1295,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1297,6 +1307,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1308,6 +1319,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1319,6 +1331,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     },
@@ -1330,6 +1343,7 @@
       "limite": 0.1,
       "alerta": false,
       "acao": "sem_alerta",
+      "status": "calculado",
       "limite_ks": 0.1,
       "limite_variacao_total": 0.1
     }
