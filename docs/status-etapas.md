@@ -6,7 +6,7 @@ Atualizado em 10/11/2026. **Conclusão técnica: 100% (10 de 10 blocos da entreg
 
 | Etapa | Status | Evidência ou resultado |
 |---|---|---|
-| 1. Implementar monitoramento | Concluída e verificada | `monitoramento.py`; 15/15 testes aprovados em 10/11; tratamento de rótulo atrasado e métricas globais/por canal; resultado em `docs/evidencias/testes-automatizados.json` |
+| 1. Implementar monitoramento | Concluída e verificada | `monitoramento.py`; 18/18 testes aprovados em 10/11; tratamento de rótulo atrasado e métricas globais/por canal; resultado em `docs/evidencias/testes-automatizados.json` |
 | 2. Relatório zero e limites | Concluída | Comparação 11→12; política investigativa: KS D ≥ 0,10 ou variação total ≥ 0,10; sem retreino nem troca automática |
 | 3. Referência | Concluída | 39.497 linhas, features, scores e rótulos anexados à run E03; SHA-256 conferido |
 | 4. Registrar e promover | Concluída após aprovação humana | `antifraude` v1, `champion`, threshold 0,10, motivo e descrição |

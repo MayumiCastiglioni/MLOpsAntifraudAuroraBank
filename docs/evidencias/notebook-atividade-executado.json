@@ -6,5 +6,5 @@
   "celulas_de_codigo_com_conteudo": 15,
   "celulas_com_execucao": 15,
   "erros": [],
-  "resultado": "execução integral sem erros; inclui relatório zero recalculado, distinção de run de produção e reprodução, verificações de registry/API e checklist de exportação"
+  "resultado": "execução integral sem erros; inclui tabela consolidada de alertas com status de amostra e ação de qualidade, relatório zero recalculado e verificações do registry/API"
 }

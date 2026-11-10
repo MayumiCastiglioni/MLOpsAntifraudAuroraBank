@@ -87,4 +87,11 @@ def gerar() -> dict:
 
 
 if __name__ == "__main__":
-    print(json.dumps(gerar(), ensure_ascii=False, indent=2))
+    relatorio = gerar()
+    print(json.dumps({
+        "arquivo": str(SAIDA.relative_to(ROOT)),
+        "semana_referencia": relatorio["semana_referencia"],
+        "semana_lote": relatorio["semana_lote"],
+        "n_alertas": relatorio["resumo"]["n_alertas"],
+        "features_para_investigar": relatorio["resumo"]["features_para_investigar"],
+    }, ensure_ascii=False, indent=2))

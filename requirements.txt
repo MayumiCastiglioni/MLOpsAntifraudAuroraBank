@@ -1,4 +1,4 @@
-# Versões efetivamente usadas nesta execução; requirements.txt preserva requisitos do professor.
+# Dependências diretas fixadas para Python 3.11; versões usadas na execução da entrega.
 mlflow==2.19.0
 scikit-learn==1.8.0
 pandas==2.3.3

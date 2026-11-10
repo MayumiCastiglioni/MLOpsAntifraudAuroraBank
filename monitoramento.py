@@ -60,7 +60,8 @@ def drift_continuas(referencia, lote, colunas, limite_D=0.10):
                            p_valor=float(teste.pvalue) if teste else np.nan,
                            limite_alerta=float(limite_D),
                            alerta=bool(np.isfinite(d) and d >= limite_D),
-                           acao="investigar" if np.isfinite(d) and d >= limite_D else "sem_alerta",
+                           acao=("investigar" if d >= limite_D else "sem_alerta")
+                                if teste else "verificar_qualidade_dados",
                            status="calculado" if teste else "sem_amostra_valida"))
     return pd.DataFrame(linhas)
 
@@ -73,6 +74,15 @@ def drift_categoricas(referencia, lote, colunas, limite_variacao_total=0.10):
     """
     linhas = []
     for coluna in colunas:
+        if referencia.empty or lote.empty:
+            linhas.append(dict(feature=coluna, categoria=None, ausente=False,
+                               proporcao_referencia=np.nan, proporcao_lote=np.nan,
+                               diferenca_pp=np.nan, variacao_total=np.nan,
+                               categoria_nova=False,
+                               limite_alerta=float(limite_variacao_total),
+                               alerta=False, acao="verificar_qualidade_dados",
+                               status="sem_amostra_valida"))
+            continue
         def distribuicao(df):
             return df[coluna].map(lambda x: ("ausente", "") if pd.isna(x) else ("valor", str(x))).value_counts(normalize=True)
         a, b = distribuicao(referencia), distribuicao(lote)
@@ -163,11 +173,11 @@ def monitorar(referencia, lote, contrato, threshold, segmento="canal", rotulos_f
     distribuicoes = drift_categoricas(referencia, lote, categoricas, limite_variacao_total)
     alertas_ks = continuas.assign(tipo="ks", medida="D", valor=continuas["D"],
                                    limite=continuas["limite_alerta"])[
-        ["feature", "tipo", "medida", "valor", "limite", "alerta", "acao"]]
+        ["feature", "tipo", "medida", "valor", "limite", "alerta", "acao", "status"]]
     alertas_tv = distribuicoes.drop_duplicates("feature").assign(
         tipo="proporcoes", medida="variacao_total", valor=lambda d: d["variacao_total"],
         limite=lambda d: d["limite_alerta"])[
-        ["feature", "tipo", "medida", "valor", "limite", "alerta", "acao"]]
+        ["feature", "tipo", "medida", "valor", "limite", "alerta", "acao", "status"]]
     alertas = pd.concat([alertas_ks, alertas_tv], ignore_index=True)
     alertas["limite_ks"] = float(limite_ks)
     alertas["limite_variacao_total"] = float(limite_variacao_total)
