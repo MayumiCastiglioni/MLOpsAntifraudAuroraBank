@@ -25,6 +25,11 @@ def medir(real, score, valores, threshold):
 import pandas as pd
 from scipy.stats import ks_2samp
 
+# Estas variáveis inteiras têm ordem e distância com significado: dias de
+# idade da conta e quantidade de transações. Hora e dia da semana são tratadas
+# como distribuições cíclicas/discretas, não como magnitudes lineares.
+COLUNAS_ORDINAIS_NUMERICAS = {"idade_conta_dias", "qtd_transacoes_1h"}
+
 
 def _scores(df, coluna="score"):
     if df.empty:
@@ -35,24 +40,32 @@ def _scores(df, coluna="score"):
     return s
 
 
-def drift_continuas(referencia, lote, colunas):
-    """KS com D/p-valor; nulos e não finitos são contabilizados separadamente."""
+def drift_continuas(referencia, lote, colunas, limite_D=0.10):
+    """KS com D/p-valor e sinal de investigação por magnitude.
+
+    D é a maior diferença entre as distribuições acumuladas empíricas.
+    O p-valor é contexto estatístico; o alerta usa D, não significância isolada.
+    """
     linhas = []
     for coluna in colunas:
         ref = pd.to_numeric(referencia[coluna], errors="coerce").to_numpy(dtype=float)
         atual = pd.to_numeric(lote[coluna], errors="coerce").to_numpy(dtype=float)
         a, b = ref[np.isfinite(ref)], atual[np.isfinite(atual)]
         teste = ks_2samp(a, b) if len(a) and len(b) else None
+        d = float(teste.statistic) if teste else np.nan
         linhas.append(dict(feature=coluna, n_referencia=len(a), n_lote=len(b),
                            invalidos_referencia=int((~np.isfinite(ref)).sum()),
                            invalidos_lote=int((~np.isfinite(atual)).sum()),
-                           D=float(teste.statistic) if teste else np.nan,
+                           D=d,
                            p_valor=float(teste.pvalue) if teste else np.nan,
+                           limite_alerta=float(limite_D),
+                           alerta=bool(np.isfinite(d) and d >= limite_D),
+                           acao="investigar" if np.isfinite(d) and d >= limite_D else "sem_alerta",
                            status="calculado" if teste else "sem_amostra_valida"))
     return pd.DataFrame(linhas)
 
 
-def drift_categoricas(referencia, lote, colunas):
+def drift_categoricas(referencia, lote, colunas, limite_variacao_total=0.10):
     """Proporções alinhadas e distância de variação total (0–1).
 
     Inclui categorias novas e ausentes; não depende de aproximação qui-quadrado.
@@ -71,6 +84,9 @@ def drift_categoricas(referencia, lote, colunas):
                                proporcao_referencia=float(pa.at[chave]), proporcao_lote=float(pb.at[chave]),
                                diferenca_pp=float(100*(pb.at[chave]-pa.at[chave])),
                                variacao_total=tv, categoria_nova=chave not in a.index,
+                               limite_alerta=float(limite_variacao_total),
+                               alerta=bool(np.isfinite(tv) and tv >= limite_variacao_total),
+                               acao="investigar" if np.isfinite(tv) and tv >= limite_variacao_total else "sem_alerta",
                                status="calculado" if np.isfinite(tv) else "sem_amostra"))
     return pd.DataFrame(linhas)
 
@@ -128,15 +144,35 @@ def performance_rotulada(lote, threshold, segmento="canal", rotulos_fechados=Fal
     return pd.DataFrame(linhas)
 
 
-def monitorar(referencia, lote, contrato, threshold, segmento="canal", rotulos_fechados=False):
+def monitorar(referencia, lote, contrato, threshold, segmento="canal", rotulos_fechados=False,
+              limite_ks=0.10, limite_variacao_total=0.10):
     """Recebe tabelas (por exemplo, CSV exportado da API) e devolve relatórios.
 
-    Contagens discretas, booleanas e hora usam proporções; floats e score usam
-    KS. Não produz veredito de incidente nem custo sem fechamento de rótulos.
+    Floats, score e inteiros ordinais (`idade_conta_dias`,
+    `qtd_transacoes_1h`) usam KS. Categorias, booleanas, hora e dia da semana
+    usam proporções. ``alertas`` lista cada variável e a ação por magnitude;
+    alerta pede investigação, não é veredito de incidente ou retreino.
     """
-    continuas = [f["nome"] for f in contrato["features"] if f["tipo"] == "float"] + ["score"]
-    categoricas = [f["nome"] for f in contrato["features"] if f["tipo"] != "float"]
-    return dict(continuas=drift_continuas(referencia,lote,continuas),
-                categoricas=drift_categoricas(referencia,lote,categoricas),
+    if not 0 <= limite_ks <= 1 or not 0 <= limite_variacao_total <= 1:
+        raise ValueError("Limites de drift devem estar entre zero e um")
+    colunas_ks = [f["nome"] for f in contrato["features"]
+                  if f["tipo"] == "float" or f["nome"] in COLUNAS_ORDINAIS_NUMERICAS]
+    categoricas = [f["nome"] for f in contrato["features"]
+                   if f["nome"] not in colunas_ks]
+    continuas = drift_continuas(referencia, lote, colunas_ks + ["score"], limite_ks)
+    distribuicoes = drift_categoricas(referencia, lote, categoricas, limite_variacao_total)
+    alertas_ks = continuas.assign(tipo="ks", medida="D", valor=continuas["D"],
+                                   limite=continuas["limite_alerta"])[
+        ["feature", "tipo", "medida", "valor", "limite", "alerta", "acao"]]
+    alertas_tv = distribuicoes.drop_duplicates("feature").assign(
+        tipo="proporcoes", medida="variacao_total", valor=lambda d: d["variacao_total"],
+        limite=lambda d: d["limite_alerta"])[
+        ["feature", "tipo", "medida", "valor", "limite", "alerta", "acao"]]
+    alertas = pd.concat([alertas_ks, alertas_tv], ignore_index=True)
+    alertas["limite_ks"] = float(limite_ks)
+    alertas["limite_variacao_total"] = float(limite_variacao_total)
+    return dict(continuas=continuas,
+                categoricas=distribuicoes,
+                alertas=alertas,
                 operacional=saida_operacional(lote,threshold),
                 performance=performance_rotulada(lote,threshold,segmento,rotulos_fechados))

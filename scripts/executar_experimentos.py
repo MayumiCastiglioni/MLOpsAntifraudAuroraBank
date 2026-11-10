@@ -32,7 +32,10 @@ def main():
         destino.mkdir(parents=True,exist_ok=True)
         mlflow.create_experiment(nome_experimento,artifact_location=destino.as_uri())
     mlflow.set_experiment(nome_experimento)
-    commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+    try:
+        commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True,stderr=subprocess.DEVNULL).strip()
+    except (FileNotFoundError,subprocess.CalledProcessError):
+        commit="nao_disponivel_fora_git"
     registros=[]
     for nome,modelo,escalar in modelos:
         print("INICIANDO",nome,flush=True)

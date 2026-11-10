@@ -40,7 +40,7 @@ Entrega informada no material: **11/11/2026 às 23h59**, horário de Brasília.
 
 ## Como começar
 
-A aplicação fornecida foi integrada na raiz, preservando material/. Use Python 3.11 e instale requirements.txt em ambiente próprio; requirements.local.txt registra as versões da execução local. No Windows, prefira caminho curto para o ambiente virtual.
+A aplicação fornecida foi integrada na raiz, preservando material/. Use Python 3.11 e instale requirements.txt em ambiente próprio; esse único arquivo fixa as versões usadas na aplicação e na reprodução dos notebooks. No Windows, prefira caminho curto para o ambiente virtual.
 
 1. Extraia os dois CSVs do ZIP para dados/ (ignorados no Git).
 2. Configure .env a partir de .env.exemplo; use banco antifraude e um backend MLflow separado, sem apagar recursos existentes.

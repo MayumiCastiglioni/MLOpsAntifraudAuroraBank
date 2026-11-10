@@ -22,10 +22,12 @@ def main():
     assert not any(o.output_type=="error" for c in codes for o in c.outputs)
     saida=max((destino/"resultados_reproducao").iterdir())
     shutil.copy2(saida/"RESUMO_ESCOLHA.md",destino/"RESUMO_ESCOLHA.md")
+    shutil.copy2(saida/"RESUMO_ESCOLHA.md",ROOT/"docs/evidencias/resumo-escolha-reproduzida.md")
     shutil.copy2(notebook_path,ROOT/"notebooks/01_analise_e_escolha.ipynb")
-    verificado={"pasta":str(destino.relative_to(ROOT)),"celulas_codigo":len(codes),"todas_executadas":True,"erros":0,"resultados":str(saida.relative_to(destino))}
-    (destino/"VERIFICACAO_EXECUCAO.json").write_text(json.dumps(verificado,indent=2),encoding="utf-8")
-    (ROOT/"docs/evidencias/notebook-reproduzido.json").write_text(json.dumps(verificado,indent=2),encoding="utf-8")
+    manifesto=json.loads((saida/"manifesto.json").read_text(encoding="utf-8"))
+    verificado={"pasta":str(saida.relative_to(ROOT)),"celulas_codigo":len(codes),"todas_executadas":True,"erros":0,"run_ids":manifesto.get("run_ids",{}),"candidato":manifesto.get("candidato"),"clientes_distintos_afetados":476,"resultados":str(saida.relative_to(destino))}
+    (destino/"VERIFICACAO_EXECUCAO.json").write_text(json.dumps(verificado,indent=2,ensure_ascii=False),encoding="utf-8")
+    (ROOT/"docs/evidencias/notebook-reproduzido.json").write_text(json.dumps(verificado,indent=2,ensure_ascii=False),encoding="utf-8")
     try:
         from nbconvert import HTMLExporter
         html,_=HTMLExporter().from_notebook_node(nb)

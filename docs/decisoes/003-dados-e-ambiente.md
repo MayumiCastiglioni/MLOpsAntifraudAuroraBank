@@ -10,7 +10,7 @@ Auditorias inicial e temporal em docs/evidencias verificaram 240.384 pares trans
 
 Preservar linhas e valores originais, sem imputação, remoção por data de contestação ou recálculo silencioso de features. Manter treino 1–10 e validação 11–12. Repetição de clientes entre períodos não altera essa regra e IDs não entram no Pipeline. Categorias vêm do contrato.
 
-Usar MLflow 2.19.0 separado na porta 5001 e backend aurora_mlflow, preservando o servidor 3.16.0 existente na porta 5000. Aplicação na porta 8001, banco antifraude. Ambiente em caminho curto devido ao limite de caminhos do Windows; herda pacotes do Python local, com versões efetivas registradas em requirements.local.txt e ambiente.json. Não é ambiente hermético.
+Usar MLflow 2.19.0 separado na porta 5001 e backend aurora_mlflow, preservando o servidor 3.16.0 existente na porta 5000. Aplicação na porta 8001, banco antifraude. Ambiente em caminho curto devido ao limite de caminhos do Windows; herda pacotes do Python local, com versões efetivas agora consolidadas em requirements.txt. A reprodução fixa as dependências Python, mas o MLflow e os serviços de produção continuam sendo componentes externos quando usados.
 
 ## Incidentes técnicos
 
