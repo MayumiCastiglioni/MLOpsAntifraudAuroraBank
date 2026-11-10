@@ -2,6 +2,9 @@
 import hashlib
 import json
 from pathlib import Path
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 import pandas as pd
 import mlflow
 from sklearn.metrics import accuracy_score
@@ -11,7 +14,6 @@ from monitoramento import medir
 
 RUN = "ff48c43154624ec9a1e3d16688909ef3"
 THRESHOLD = 0.10
-ROOT = Path(__file__).resolve().parents[1]
 ARTIFATO = Path.home() / ".codex" / "aurora-artifacts" / RUN / "artifacts" / "modelo"
 
 
