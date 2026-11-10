@@ -7,26 +7,6 @@
     12
   ],
   "linhas": 39497,
-  "colunas": [
-    "id_transacao",
-    "semana",
-    "valor_transacao",
-    "hora_transacao",
-    "dia_semana",
-    "canal",
-    "dispositivo_novo",
-    "qtd_transacoes_1h",
-    "valor_medio_30d",
-    "razao_valor_media",
-    "distancia_ultima_transacao_km",
-    "idade_conta_dias",
-    "destinatario_novo",
-    "categoria_estabelecimento",
-    "uf_cliente",
-    "score",
-    "bloqueada",
-    "fraude"
-  ],
   "features": [
     "valor_transacao",
     "hora_transacao",
@@ -71,5 +51,5 @@
       "accuracy": 0.9863860090061787
     }
   },
-  "status": "validada_local; log_artifact na run MLflow pendente por indisponibilidade do Postgres backend"
+  "status": "preparada_e_validada_localmente; anexar à run E03 quando Postgres/MLflow voltar"
 }
