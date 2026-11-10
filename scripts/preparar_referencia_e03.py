@@ -44,7 +44,7 @@ def main():
     assert round(metricas["11"]["custo"], 2) == 11019.25
     assert round(metricas["12"]["custo"], 2) == 7966.36
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-    manifesto = {"run_id": RUN, "modelo": "E03 RandomForestClassifier", "threshold": THRESHOLD, "semanas": [11, 12], "linhas": len(check), "features": cols, "linhagem": {"transacoes_sha256": sha(trans_path), "rotulos_sha256": sha(rotulos_path), "referencia_sha256": sha(destino)}, "metricas_por_semana": metricas, "status": "preparada_e_validada_localmente; anexar à run E03 quando Postgres/MLflow voltar"}
+    manifesto = {"run_id": RUN, "modelo": "E03 RandomForestClassifier", "threshold": THRESHOLD, "semanas": [11, 12], "linhas": len(check), "colunas": list(check.columns), "features": cols, "linhagem": {"transacoes_sha256": sha(trans_path), "rotulos_sha256": sha(rotulos_path), "referencia_sha256": sha(destino)}, "metricas_por_semana": metricas, "status": "preparada_e_validada_localmente; anexar à run E03 quando Postgres/MLflow voltar"}
     saida = ROOT / "docs" / "evidencias" / "referencia-e03-preparada.json"
     saida.write_text(json.dumps(manifesto, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({"csv": str(destino), "manifesto": str(saida), "n": len(check), "metricas": metricas}, ensure_ascii=False))
