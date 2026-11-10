@@ -24,3 +24,7 @@ Scores e valores devem estar completos e válidos para operação/performance. O
 Casos novos: rótulo parcial sem imputação; fechamento explícito; ausência total de rótulos; operação sem rótulos e igualdade ao corte; categoria nova/ausente; KS sem mudança com ausência informada; segmento sem fraude; rótulo inválido.
 
 Não houve comparação das semanas 11–12 nesta etapa, definição de alertas, retreino, promoção ou modificação do pacote de entrega anterior. Esses passos têm estados próprios.
+
+## Política inicial escolhida
+
+Em 10/11/2026, adotou-se alerta investigativo se KS D ≥ 0,10 em variável contínua/score ou distância de variação total ≥ 0,10 em categoria/discreta. Um alerta solicita análise humana; não retreina nem altera modelo ou threshold. São limites provisórios baseados apenas no relatório zero das semanas 11–12. `idade_conta_dias` excederia o limite neste baseline e deve ser investigada, sem conclusão automática de incidente.

@@ -1,6 +1,6 @@
 # 007 — Relatório zero e limites de alerta
 
-Data: 08/11/2026. Estado: relatório executado; decisão operacional de limites pendente.
+Data: 08/11/2026. Estado: relatório executado; política investigativa escolhida pelo usuário em 10/11/2026.
 
 ## Contexto e evidência
 
@@ -16,6 +16,11 @@ Entre variáveis contínuas, o maior KS foi score (D=0,009664; p=0,313591). A ma
 2. **Alerta investigativo por magnitude:** sinalizar para análise humana KS D ≥ 0,10 em contínuas ou variação total ≥ 0,10 em categorias, sem retreino nem mudança de política. Limiares são provisórios e não calibrados com mais semanas; podem não capturar efeitos sutis e idade_conta_dias já os excederia.
 3. **Calibrar com histórico mais longo:** adiar alertas até obter semanas operacionais adicionais e avaliar estabilidade por volume/canal. Evita tratar uma única comparação como distribuição de referência, mas deixa o período sem sinal automático.
 
-## Pendências e consequências
+## Decisão registrada
 
-É necessária decisão humana sobre qual opção usar e eventual ajuste de limites, inclusive aceitação de alerta investigativo para idade_conta_dias. Nenhum alerta operacional foi ativado, nenhum modelo foi retreinado e nenhum alias/corte foi alterado. A métrica da semana 12 é avaliação retrospectiva sobre validação usada na seleção, não garantia futura. Próxima etapa técnica independente: consolidar referência final features/scores/rótulos na run E03; depende de confirmar a destinação e retenção do artefato de referência.
+Em 10/11/2026, a usuária escolheu a opção 2: KS D ≥ 0,10 ou distância de variação total ≥ 0,10 gera investigação humana. O monitoramento não retreina nem muda o modelo automaticamente. Com os dados do relatório zero, `idade_conta_dias` acionaria investigação por magnitude; a mudança deve ser analisada, sem presumir incidente ou falha.
+
+## Consequências e pendências
+
+Os limites são provisórios: há somente uma comparação entre semanas, sem calibração histórica suficiente. Métrica da semana 12 é retrospectiva sobre validação usada na seleção, não garantia futura. Registrar estes limites como decisão operacional, sem alterar alias ou corte. Próxima etapa técnica: consolidar referência final de features/scores/rótulos na run E03, preservando rastreabilidade.
+
