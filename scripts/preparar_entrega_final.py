@@ -152,6 +152,7 @@ def preparar() -> tuple[Path, Path, dict]:
     # Preserve outputs from the latest full notebook reproduction, including
     # the five model result files, threshold curves, data hashes, and summary.
     evidencia_repro = ROOT / "docs/evidencias/notebook-reproduzido.json"
+    resumo_reproducao: Path | None = None
     if evidencia_repro.exists():
         reproducao = json.loads(evidencia_repro.read_text(encoding="utf-8"))
         origem_resultados = ROOT / reproducao["pasta"]
@@ -161,6 +162,7 @@ def preparar() -> tuple[Path, Path, dict]:
                 and (origem_resultados / "resultados.json").is_file()):
             destino_resultados = pasta / "resultados_reproducao" / origem_resultados.name
             shutil.copytree(origem_resultados, destino_resultados)
+            resumo_reproducao = origem_resultados / "RESUMO_ESCOLHA.md"
             # Store paths relative to the extracted ZIP, not to the author's workspace.
             reproducao["pasta"] = (Path("resultados_reproducao") / origem_resultados.name).as_posix()
             reproducao["resultados"] = (Path("resultados_reproducao") / origem_resultados.name).as_posix()
@@ -172,13 +174,13 @@ def preparar() -> tuple[Path, Path, dict]:
     else:
         avisos.append("manifesto da última execução reproduzível não foi encontrado")
 
-    resumo = (ROOT / "docs/evidencias/resumo-escolha-reproduzida.md")
-    if resumo.exists():
-        arquivos_incluidos.append(copiar_arquivo(pasta, "docs/evidencias/resumo-escolha-reproduzida.md", "RESUMO_ESCOLHA.md"))
+    if resumo_reproducao and resumo_reproducao.is_file():
+        shutil.copy2(resumo_reproducao, pasta / "RESUMO_ESCOLHA.md")
+    else:
+        avisos.append("resumo da reprodução não foi encontrado dentro dos resultados arquivados")
 
     leia_primeiro = """# Entrega final — Banco Aurora\n\nAutora: Mayumi Castiglioni. O pacote reúne notebook da atividade, notebook executado de auditoria e comparação, resultados e curvas das cinco famílias, código, contrato, dados fornecidos, referência e evidências da versão promovida.\n\n## Ordem de leitura\n\n1. `parte1.ipynb` — respostas, evidências e verificação de operação.\n2. `RESUMO_ESCOLHA.md` — escolha em linguagem de custo.\n3. `resultados_reproducao/` — métricas, curvas, hashes, run_ids e resumo da reprodução integral.\n4. `docs/decisoes/` e `docs/evidencias/` — decisões e rastreabilidade.\n\n## Reprodução\n\nUse Python 3.11 e instale `requirements.txt`. Para reproduzir análise e treinos, abra `notebooks/01_analise_e_escolha.ipynb` e execute todas as células. Para refazer as conferências de produção no notebook `parte1.ipynb`, configure `.env` a partir de `.env.exemplo`, inicie Postgres, MLflow e API conforme `docs/reproducao-e-entrega.md` e execute as células. A promoção de modelo não é automática.\n\nOs resultados das semanas 11–12 são validação usada na seleção, não teste independente. A política de alerta gera investigação humana; não retreina nem troca modelo ou corte automaticamente.\n"""
     (pasta / "README.md").write_text(leia_primeiro, encoding="utf-8")
-    (pasta / "LEIA_PRIMEIRO.md").write_text(leia_primeiro, encoding="utf-8")
 
     resultado = {
         "aluno": NOME_ALUNO,

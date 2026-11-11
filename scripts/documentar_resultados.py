@@ -55,7 +55,7 @@ def main():
     for registro in completos:
         with mlflow.start_run(run_id=registro["run_id"]):
             for conjunto,contexto in conjuntos:mlflow.log_input(conjunto,context=contexto)
-            for arquivo in ["docs/evidencias/auditoria-inicial.json","docs/evidencias/auditoria-temporal.json","docs/evidencias/ambiente.json"]:
+            for arquivo in ["docs/evidencias/auditoria-inicial.json","docs/evidencias/auditoria-temporal.json"]:
                 mlflow.log_artifact(arquivo,artifact_path="auditoria")
     with mlflow.start_run(run_id=vencedor["run_id"]):
         mlflow.set_tags({"decisao":"selecionado_por_custo_promocao_pendente","threshold_selecionado":str(m['threshold'])})

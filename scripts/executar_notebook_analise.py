@@ -22,7 +22,6 @@ def main():
     assert not any(o.output_type=="error" for c in codes for o in c.outputs)
     saida=max((destino/"resultados_reproducao").iterdir())
     shutil.copy2(saida/"RESUMO_ESCOLHA.md",destino/"RESUMO_ESCOLHA.md")
-    shutil.copy2(saida/"RESUMO_ESCOLHA.md",ROOT/"docs/evidencias/resumo-escolha-reproduzida.md")
     shutil.copy2(notebook_path,ROOT/"notebooks/01_analise_e_escolha.ipynb")
     manifesto=json.loads((saida/"manifesto.json").read_text(encoding="utf-8"))
     verificado={"pasta":str(saida.relative_to(ROOT)),"celulas_codigo":len(codes),"todas_executadas":True,"erros":0,"run_ids":manifesto.get("run_ids",{}),"candidato":manifesto.get("candidato"),"clientes_distintos_afetados":476,"resultados":str(saida.relative_to(destino))}
