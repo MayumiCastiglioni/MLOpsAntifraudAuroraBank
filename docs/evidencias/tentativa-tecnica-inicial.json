@@ -1,0 +1,8 @@
+[
+  {
+    "id": "E01",
+    "status": "falhou",
+    "run_id": "6159c38f1b0d436c8b0cb5e3bf901e57",
+    "erro": "Could not find a registered artifact repository for: c:\\Users\\mayumishimizu-ieg\\OneDrive - Instituto Germinare\\Área de Trabalho\\3º ANO\\Ciência de Dados II\\Turnover novo\\MLOpsAntifraudAuroraBank\\mlruns/1/6159c38f1b0d436c8b0cb5e3bf901e57/artifacts. Currently registered schemes are: ['', 'file', 's3', 'r2', 'gs', 'wasbs', 'ftp', 'sftp', 'dbfs', 'hdfs', 'viewfs', 'runs', 'models', 'http', 'https', 'mlflow-artifacts']"
+  }
+]

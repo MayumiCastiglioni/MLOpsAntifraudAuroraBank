@@ -1,8 +1,14 @@
 # Plano de execução — Parte 1
 
 Atualizado em 06/11/2026. Entrega exigida: 11/11/2026, às 23h59 (Brasília).
-Estado: planejamento; nenhuma etapa de implementação foi concluída.
+Estado em 10/11/2026: as etapas técnicas da entrega foram concluídas; notebook e pacote final foram gerados e verificados. Evidências em `docs/evidencias/` e status consolidado em `docs/status-etapas.md`.
 Datas abaixo são metas propostas, não resultados ou compromissos já cumpridos.
+
+## Prioridade atual: adiantar em 06/11
+
+O usuário solicitou concentrar o máximo de avanço hoje. As datas da tabela abaixo são reserva de prazo, não impedimento para antecipar etapas. Ordem do dia: auditoria reproduzível → ambiente e scaffold → custo e Pipeline → rodada inicial das cinco famílias → monitoramento → integração, conforme as verificações permitirem. Nenhuma etapa deve ser declarada concluída sem evidência.
+
+Todo teste deve seguir [o protocolo de experimentos](experimentos.md), aparecer no notebook e acompanhar a exportação final, inclusive tentativas descartadas ou malsucedidas. O escopo da rodada inicial é cinco configurações, uma por família, sem busca extensa.
 
 ## Estratégia
 
@@ -23,7 +29,7 @@ Primeiro verificar dados e ambiente; depois comparar modelos e políticas de cor
 
 ## Experimentos iniciais propostos
 
-Comparar regressão logística com Random Forest como ponto de partida: uma referência simples e um modelo capaz de representar relações não lineares. A dupla é proposta, não escolha definitiva. Validar suporte ao Pipeline, predict_proba e ambiente antes de adotar. Começar com poucos hiperparâmetros, sem busca extensa na validação.
+Proposta inicial ampliada no protocolo de experimentos: regressão logística, árvore de decisão, Random Forest, Extra Trees e HistGradientBoosting. A comparação original entre regressão logística e Random Forest permanece como referência de contraste: uma referência simples e um modelo capaz de representar relações não lineares. A dupla é proposta, não escolha definitiva. Validar suporte ao Pipeline, predict_proba e ambiente antes de adotar. Começar com poucos hiperparâmetros, sem busca extensa na validação.
 
 Definir precisamente PR-AUC (por exemplo, average precision, explicitamente identificada) para evitar comparar implementações diferentes. Não confundir ROC-AUC com a métrica solicitada.
 
@@ -36,7 +42,7 @@ Definir precisamente PR-AUC (por exemplo, average precision, explicitamente iden
 | Modelo e threshold | Custo contra aprovar tudo, Pix > R$ 1.000 e mesmo modelo a 0,5; análise por semana | Aberta |
 | Segmento de monitoramento | Volume e relevância operacional; canal é candidato inicial | Aberta |
 | Limites de alerta | Relatório zero, magnitude, volume e relevância prática | Aberta |
-| Promoção | Piso atendido, rastreabilidade e inferência verificada | Pendente |
+| Promoção | Piso atendido, rastreabilidade e inferência verificada | Concluída após aprovação humana; ADR 009 |
 
 Cada registro deve conter contexto, alternativas, evidência, escolha, consequências e limitações. Hipótese não vira decisão aceita sem análise.
 
@@ -58,6 +64,16 @@ Cada registro deve conter contexto, alternativas, evidência, escolha, consequê
 
 Usar branches codex/<assunto> e PRs por etapa coerente: dados e ambiente; pipeline e comparação; monitoramento; produção e entrega. Cada PR explica decisão, evidências, verificações e limitações. Documentação não implica que uma etapa foi executada.
 
-## Próxima ação concreta
+## Encerramento do plano
 
-Auditar os dois CSVs diretamente do ZIP ou de uma pasta local ignorada pelo Git. Produzir relatório de contagens e inconsistências antes de limpar dados, treinar ou escolher modelo. Em paralelo lógico, conferir a compatibilidade do ambiente, sem alterar serviços existentes.
+A ação de auditoria abriu a execução e já foi concluída. As tarefas pendentes de monitoramento, baseline, promoção, paridade de API e empacotamento também foram finalizadas; não resta implementação nesta entrega. Falta somente a aluna anexar o ZIP final à atividade escolar.
+
+## Situação histórica ao final da rodada de 06/11
+
+1. Auditoria inicial e temporal executadas; limitações upstream explicitadas no registro 003.
+2. Scaffold integrado e conexões verificadas; seis tabelas no banco antifraude, MLflow 2.19.0 separado em 5001 e API em 8001.
+3. Pipeline e custo implementados; sete testes passaram.
+4. Cinco modelos concluídos em runs distintas, com curvas, baselines, configuração, métricas por semana e dados de lineage. Uma tentativa técnica anterior falhou antes do treino e está preservada.
+5. Candidato selecionado: Random Forest, corte 0,10; justificativa em comparacao-inicial.md e registro 004. Custo de R$ 18.985,61 nas duas semanas. Sem promoção.
+
+Naquela data, essas etapas estavam pendentes. Elas foram concluídas em 10/11/2026; consulte `docs/status-etapas.md`.

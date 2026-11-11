@@ -1,0 +1,20 @@
+# Dependências diretas fixadas para Python 3.11; versões usadas na execução da entrega.
+mlflow==2.19.0
+scikit-learn==1.8.0
+pandas==2.3.3
+numpy==2.1.0
+scipy==1.17.1
+pyyaml==6.0.3
+psycopg2-binary==2.9.9
+python-dotenv==1.1.0
+fastapi==0.119.0
+uvicorn==0.38.0
+python-multipart==0.0.28
+matplotlib==3.10.7
+sqlalchemy==2.0.41
+
+# Execução e leitura do notebook
+nbformat==5.10.4
+nbclient==0.10.2
+ipykernel==6.29.5
+notebook==7.3.2

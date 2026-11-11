@@ -1,0 +1,16 @@
+{
+  "pasta": "entrega\\analise_20261110T184041Z\\resultados_reproducao\\20261110T184047_082995Z",
+  "celulas_codigo": 17,
+  "todas_executadas": true,
+  "erros": 0,
+  "run_ids": {
+    "E01": "1905838ef4cd447b9483a46655413a52",
+    "E02": "fc325a576b2a45ab92a58d0a12e99bb8",
+    "E03": "3d3afdd446784c8aa9a8a7737fe5ae50",
+    "E04": "622a49b653df45e6bb19ebd90af4ea63",
+    "E05": "3032a60f75c645d092ae7e0a739eab95"
+  },
+  "candidato": "E03",
+  "clientes_distintos_afetados": 476,
+  "resultados": "resultados_reproducao/20261110T184047_082995Z"
+}

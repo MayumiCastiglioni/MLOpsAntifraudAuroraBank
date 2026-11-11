@@ -1,0 +1,25 @@
+{
+  "modelo": "antifraude v1 / RandomForestClassifier E03",
+  "run_id": "ff48c43154624ec9a1e3d16688909ef3",
+  "threshold": 0.1,
+  "semanas": [
+    11,
+    12
+  ],
+  "criterio": "fraude==0 e score>=threshold",
+  "transacoes_legitimas_bloqueadas": 480,
+  "clientes_distintos_periodo": 476,
+  "por_semana": {
+    "11": {
+      "transacoes": 267,
+      "clientes_distintos": 266
+    },
+    "12": {
+      "transacoes": 213,
+      "clientes_distintos": 212
+    }
+  },
+  "clientes_presentes_nas_duas_semanas": 2,
+  "metodo": "junção 1:1 da referência pontuada com id_cliente do histórico; id_cliente usado apenas para deduplicação do impacto, não como feature",
+  "custo_atrito": "R$ 15 por transação legítima bloqueada, conforme demanda"
+}

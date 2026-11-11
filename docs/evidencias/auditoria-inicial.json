@@ -1,0 +1,185 @@
+{
+  "transacoes": 240384,
+  "rotulos": 240384,
+  "sha256_transacoes": "2a21363ee7499a646dd0e04288bba0b81abf87aad4a34c8b299564664a641414",
+  "sha256_rotulos": "bafda7607bd7dc6b724a757aea94c384f1f155d051880cebfc64e6aca0d4c75f",
+  "ids_duplicados": {
+    "transacoes": 0,
+    "rotulos": 0
+  },
+  "juncao": {
+    "both": 240384,
+    "left_only": 0,
+    "right_only": 0
+  },
+  "contrato": {
+    "valor_transacao": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "fora_min": 0
+    },
+    "hora_transacao": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "nao_inteiros": 0,
+      "fora_min": 0,
+      "fora_max": 0
+    },
+    "dia_semana": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "nao_inteiros": 0,
+      "fora_min": 0,
+      "fora_max": 0
+    },
+    "canal": {
+      "nulos": 0,
+      "fora_categorias": 0
+    },
+    "dispositivo_novo": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "nao_inteiros": 0,
+      "fora_bool": 0
+    },
+    "qtd_transacoes_1h": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "nao_inteiros": 0,
+      "fora_min": 0
+    },
+    "valor_medio_30d": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "fora_min": 0
+    },
+    "razao_valor_media": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "fora_min": 0
+    },
+    "distancia_ultima_transacao_km": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "fora_min": 0
+    },
+    "idade_conta_dias": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "nao_inteiros": 0,
+      "fora_min": 0
+    },
+    "destinatario_novo": {
+      "nulos": 0,
+      "nao_finitos": 0,
+      "nao_inteiros": 0,
+      "fora_bool": 0
+    },
+    "categoria_estabelecimento": {
+      "nulos": 0,
+      "fora_categorias": 0
+    },
+    "uf_cliente": {
+      "nulos": 0,
+      "fora_categorias": 0
+    }
+  },
+  "datas_invalidas": 0,
+  "hora_divergente": 0,
+  "dia_semana_divergente": 0,
+  "razao_erro_maximo": 5.000000000077165e-05,
+  "razao_fora_tolerancia": 0,
+  "tolerancia_razao": "absoluta 0.000051: arredondamento observado a quatro casas; verificar semântica além desta conferência",
+  "rotulos_fora_binario": 0,
+  "contestacao_ausente_por_classe": {
+    "0": 236886,
+    "1": 0
+  },
+  "semanas": [
+    {
+      "semana": 1,
+      "n": 20160,
+      "fraudes": 297,
+      "taxa": 0.014732142857142857
+    },
+    {
+      "semana": 2,
+      "n": 19811,
+      "fraudes": 282,
+      "taxa": 0.014234516177880975
+    },
+    {
+      "semana": 3,
+      "n": 20283,
+      "fraudes": 249,
+      "taxa": 0.012276290489572548
+    },
+    {
+      "semana": 4,
+      "n": 19995,
+      "fraudes": 263,
+      "taxa": 0.01315328832208052
+    },
+    {
+      "semana": 5,
+      "n": 20318,
+      "fraudes": 371,
+      "taxa": 0.01825967122748302
+    },
+    {
+      "semana": 6,
+      "n": 20479,
+      "fraudes": 298,
+      "taxa": 0.014551491772059182
+    },
+    {
+      "semana": 7,
+      "n": 20307,
+      "fraudes": 277,
+      "taxa": 0.013640616536169794
+    },
+    {
+      "semana": 8,
+      "n": 19706,
+      "fraudes": 306,
+      "taxa": 0.01552826550289252
+    },
+    {
+      "semana": 9,
+      "n": 20006,
+      "fraudes": 234,
+      "taxa": 0.011696491052684195
+    },
+    {
+      "semana": 10,
+      "n": 19822,
+      "fraudes": 321,
+      "taxa": 0.016194127736858036
+    },
+    {
+      "semana": 11,
+      "n": 20399,
+      "fraudes": 309,
+      "taxa": 0.015147801362811903
+    },
+    {
+      "semana": 12,
+      "n": 19098,
+      "fraudes": 291,
+      "taxa": 0.015237197612315425
+    }
+  ],
+  "baselines_validacao": [
+    {
+      "semana": 11,
+      "aprovar_tudo": 177029.27,
+      "regra_pix": 102820.44
+    },
+    {
+      "semana": 12,
+      "aprovar_tudo": 199006.26,
+      "regra_pix": 122529.35
+    }
+  ],
+  "limites": "Auditoria preliminar; não prova ausência de vazamento upstream, disponibilidade histórica ou semântica correta de todas as features."
+}

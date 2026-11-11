@@ -1,0 +1,30 @@
+{
+  "data_verificacao": "2026-11-10",
+  "endpoint": "POST /predict (localhost:8001)",
+  "modelo": "antifraude",
+  "versao": "1",
+  "run_id": "ff48c43154624ec9a1e3d16688909ef3",
+  "alias": "champion",
+  "threshold": 0.1,
+  "amostra": "5 transacoes da semana 12; somente features do contrato v1.0",
+  "respostas": 5,
+  "paridade_scores_apos_arredondamento_6_casas": true,
+  "erro_maximo_vs_score_arredondado": 0.0,
+  "versao_e_threshold_coincidem": true,
+  "decisoes_bloquear_coincidem_com_score_original": true,
+  "scores_api": [
+    0.142132,
+    0.787202,
+    0.008546,
+    0.040347,
+    0.189517
+  ],
+  "decisoes_api": [
+    true,
+    true,
+    false,
+    false,
+    true
+  ],
+  "limite": "Amostra de integração; não representa teste de desempenho independente."
+}

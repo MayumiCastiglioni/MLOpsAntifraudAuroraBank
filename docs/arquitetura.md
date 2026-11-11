@@ -1,6 +1,6 @@
 # Arquitetura proposta
 
-Estado: proposta documental, ainda sem implementação ou validação de execução.
+Estado em 10/11/2026: arquitetura implementada e verificada com comparação, monitoramento, referência, registry, alias champion e paridade da API. A promoção é a primeira versão do projeto (`antifraude` v1).
 
 ## Fluxo
 
@@ -18,7 +18,7 @@ Histórico → auditoria e junção 1:1 → divisão temporal → Pipeline por a
 
 ## Organização futura
 
-Na etapa de implementação, adaptar o scaffold original para a raiz com app/, contrato/, sql/, features.py, monitoramento.py e parte1.ipynb. Manter material/ intacto. Não criar abstrações ou serviços adicionais antes de necessidade comprovada.
+Scaffold original adaptado para a raiz com app/, contrato/, sql/, features.py, monitoramento.py e parte1.ipynb. Manter material/ intacto. Não criar abstrações ou serviços adicionais antes de necessidade comprovada.
 
 ## Política de avaliação
 
@@ -28,4 +28,4 @@ Escolher pelo custo com baselines no mesmo conjunto. Registrar custo por semana 
 
 Separar disponibilidade, contrato, drift e performance. Monitorar entradas e scores antes dos rótulos; medir custo real apenas com cobertura informada. Não confundir repontuação com decisões originais. Preservar evidências por versão e semana.
 
-As definições de algoritmo, tratamento de dados, limites de alerta e promoção permanecem abertas até a auditoria e comparação.
+Tratamento e decisões estão registrados nos ADRs 003–010. Alertas de magnitude solicitam investigação; a API carrega o alias champion e o threshold tagueado na versão.
